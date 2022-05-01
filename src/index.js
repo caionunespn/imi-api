@@ -88,9 +88,6 @@ app.post('/resposta', checkToken, async function(req, res) {
 app.delete('/:collection/:id', checkToken, async function(req, res) {
     try {
         const {collection, id} = req.params;
-        if (Object.keys(body).length <= 0) {
-            return res.status(400).json({error: 'Invalid body'});
-        }
     
         await database.db.collection(collection).deleteOne({
             _id: id,
