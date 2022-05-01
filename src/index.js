@@ -90,7 +90,7 @@ app.delete('/resposta/:collection/:id', checkToken, async function(req, res) {
         const {collection, id} = req.params;
     
         await database.db.collection(collection).findOneAndDelete({
-            _id: new mongoose.Types.ObjectId(req.query.id),
+            _id: new mongoose.Types.ObjectId(id),
         });
         return res.status(200).json({
             id,
