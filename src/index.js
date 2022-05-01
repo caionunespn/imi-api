@@ -22,7 +22,7 @@ database.once('connected', () => {
 const app = express();
 
 const corsOptions = {
-    origin: ['https://caionunespn.github.io/imi-motivante', 'https://caionunespn.github.io/imi-desmotivante', 'https://caionunespn.github.io/imi-admin']
+    origin: '*'
 };
 
 app.use(cors(corsOptions));
