@@ -90,7 +90,7 @@ app.delete('/:collection/:id', checkToken, async function(req, res) {
         const {collection, id} = req.params;
     
         await database.db.collection(collection).deleteOne({
-            _id: id,
+            id
         });
         return res.status(200).json({ok: true});
     } catch (err) {
