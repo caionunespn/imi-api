@@ -45,7 +45,7 @@ function checkToken(req, res, next) {
     }
 }
 
-app.get('/motivantes', checkToken, async function(req, res) {
+app.get('/resposta/motivante', checkToken, async function(req, res) {
     try {
         database.db.collection('motivante').find({}).toArray(function(err, data){
             if (err) {
@@ -58,7 +58,7 @@ app.get('/motivantes', checkToken, async function(req, res) {
     }
 });
 
-app.get('/desmotivantes', checkToken, async function(req, res) {
+app.get('/resposta/desmotivante', checkToken, async function(req, res) {
     try {
         database.db.collection('desmotivante').find({}).toArray(function(err, data){
             if (err) {
@@ -89,10 +89,14 @@ app.delete('/resposta/:collection/:id', checkToken, async function(req, res) {
     try {
         const {collection, id} = req.params;
     
-        await database.db.collection(collection).deleteOne({
-            id
+        await database.db.collection(collection).findOneAndDelete({
+            _id: id,
         });
-        return res.status(200).json({ok: true});
+        return res.status(200).json({
+            id,
+            collection,
+            deleted: true,
+        });
     } catch (err) {
         return res.status(400).json({error: err.message});
     }
