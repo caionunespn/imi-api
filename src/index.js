@@ -85,7 +85,7 @@ app.post('/resposta', checkToken, async function(req, res) {
     }
 });
 
-app.delete('/:collection/:id', checkToken, async function(req, res) {
+app.delete('/resposta/:collection/:id', checkToken, async function(req, res) {
     try {
         const {collection, id} = req.params;
     
