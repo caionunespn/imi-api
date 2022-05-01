@@ -47,7 +47,7 @@ function checkToken(req, res, next) {
 
 app.get('/motivantes', checkToken, async function(req, res) {
     try {
-        mongoose.connection.db.collection('motivante').find({}).toArray(function(err, data){
+        database.db.collection('motivante').find({}).toArray(function(err, data){
             if (err) {
                 throw Error(err);
             }
@@ -60,7 +60,7 @@ app.get('/motivantes', checkToken, async function(req, res) {
 
 app.get('/desmotivantes', checkToken, async function(req, res) {
     try {
-        mongoose.connection.db.collection('desmotivante').find({}).toArray(function(err, data){
+        database.db.collection('desmotivante').find({}).toArray(function(err, data){
             if (err) {
                 throw Error(err);
             }
@@ -78,7 +78,7 @@ app.post('/resposta', checkToken, async function(req, res) {
             return res.status(400).json({error: 'Invalid body'});
         }
     
-        await mongoose.connection.db.collection(tipo).insertOne(body);
+        await database.db.collection(tipo).insertOne(body);
         return res.status(200).json({ok: true});
     } catch (err) {
         return res.status(400).json({error: err.message});
